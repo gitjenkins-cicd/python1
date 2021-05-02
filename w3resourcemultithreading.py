@@ -16,7 +16,7 @@ def cal_cube(num):  # define a cube calculating function
         time.sleep(0.3)  # at each iteration it waits for 0.3 time
         print(" Cube is : ", n * n * n)
 
-ar = [4, 5, 6, 7, 2, 1,2,3,4,5,6,7,8,9,12,13,14,15,16,19,21,23,34,99,35,47,60,90,80,70,100] # given array
+ar = [4, 5, 6, 7, 2, 1,2,3,4,5,6,7,8,9,12,13,14,15,16,19,21,23,34,99,35,47,60,90,80,70,100,200,300,400,500] # given array
 t = time.time() # get total time to execute the functions
 #cal_cube(ar)
 #cal_sqre(ar)
