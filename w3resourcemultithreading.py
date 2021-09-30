@@ -1,6 +1,7 @@
 import time # import time module
 import threading
 from threading import *
+import MySql
 
 
 def cal_sqre(num):  # define a square calculating function
