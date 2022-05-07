@@ -26,3 +26,4 @@ with open("test.xml") as xml_file:
                 json_file.write(json_data)
                 json_file.close()
 
+/*cat employee.xml | /usr/local/bin/xq | jq -c '.[]' > employee1.json*/
