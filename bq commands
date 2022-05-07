@@ -1,0 +1,1 @@
+select r.name,r.liveLocation,r.enabletagging from `shakeersreboot.sre_dataset.sre_table_4` ,UNNEST(row) as r where r.name like '%A%'
