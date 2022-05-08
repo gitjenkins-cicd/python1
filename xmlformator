@@ -1,0 +1,16 @@
+from bs4 import BeautifulSoup
+import csv
+with open('sample.xml', 'r') as f:
+    data = f.read()
+Bs_data = BeautifulSoup(data, "xml")
+#datalist=["responseHeader","responseData"]
+#for header in datalist:
+b_unique = Bs_data.find_all('responseHeader')
+
+#for x in b_unique:
+ # print(x)
+#print(b_unique)
+with open('responseheader.csv', 'w') as f:
+  write = csv.writer(f)
+  for x in b_unique:
+    write.writerow(x)
