@@ -17,3 +17,10 @@ with open('responseheader.csv', 'w') as f:
 
 
 https://drive.google.com/file/d/1yS-E9dg-clCWSBn7tIli2syHX-U31npf/view?usp=sharing
+
+var1=$(date '+%Y-%m-%d %H:%M:%S'|awk -F: '{ print ($1 * 3600) + ($2 * 60) + $3 }')
+sleep 20
+var2=$(date '+%Y-%m-%d %H:%M:%S'|awk -F: '{ print ($1 * 3600) + ($2 * 60) + $3 }')
+diff=$(expr $var2 - $var1)
+m=60
+min=$(bc <<<"scale=2; $diff/$m")
