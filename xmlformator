@@ -24,3 +24,6 @@ var2=$(date '+%Y-%m-%d %H:%M:%S'|awk -F: '{ print ($1 * 3600) + ($2 * 60) + $3 }
 diff=$(expr $var2 - $var1)
 m=60
 min=$(bc <<<"scale=2; $diff/$m")
+
+
+sed -i 's/httpsample/buildid": "'$build'", "httpsample/' outfile1.ndl
