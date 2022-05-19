@@ -27,3 +27,5 @@ min=$(bc <<<"scale=2; $diff/$m")
 
 
 sed -i 's/httpsample/buildid": "'$build'", "httpsample/' outfile1.ndl
+
+sed 's/testResults version="1.2"/testResults version="1.2" buildid: "'$buildid'"/' error.xml
