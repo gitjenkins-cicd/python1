@@ -29,3 +29,10 @@ min=$(bc <<<"scale=2; $diff/$m")
 sed -i 's/httpsample/buildid": "'$build'", "httpsample/' outfile1.ndl
 
 sed 's/testResults version="1.2"/testResults version="1.2" buildid: "'$buildid'"/' error.xml
+
+Bigquery Timepartition
+
+https://medium.com/google-cloud/partition-on-any-field-with-bigquery-840f8aa1aaab
+https://levelup.gitconnected.com/optimizing-your-bigquery-tables-using-partitioning-time-unit-column-partitioned-tables-c93cfbf3828d
+https://hevodata.com/learn/bigquery-partition/
+https://fivetran.com/docs/destinations/bigquery/partition-table
