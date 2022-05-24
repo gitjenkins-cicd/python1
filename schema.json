@@ -1,0 +1,36 @@
+[
+  {
+  
+   "name": "Date1",
+   "type": "TIMESTAMP"
+   },
+   {
+   "name": "msg",
+   "type": "STRING"
+   },
+  {
+   "name": "url",
+   "type": "STRING"
+   },
+   {
+   "name": "responsecode",
+   "type": "INTEGER"
+   },
+   {
+   "name": "errormsg",
+   "type": "STRING"
+   },
+   {
+   "name": "connect",
+   "type": "INTEGER"
+   },
+   {
+   "name": "idletime",
+   "type": "INTEGER"
+   },
+   {
+   "name": "delaytime",
+   "type": "INTEGER"
+   }
+
+]
