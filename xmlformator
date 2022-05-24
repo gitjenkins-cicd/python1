@@ -36,3 +36,10 @@ https://medium.com/google-cloud/partition-on-any-field-with-bigquery-840f8aa1aaa
 https://levelup.gitconnected.com/optimizing-your-bigquery-tables-using-partitioning-time-unit-column-partitioned-tables-c93cfbf3828d
 https://hevodata.com/learn/bigquery-partition/
 https://fivetran.com/docs/destinations/bigquery/partition-table
+
+Bigquery insert command:
+
+INSERT INTO `shakeersreboot.sre_dataset.partitionedtable` (Date1,msg,url,responsecode,errormsg,connect,idletime,delaytime)
+SELECT Date,msg,url,responsecode,errormsg,connect,idletime,delaytime
+FROM withoutpartition
+
