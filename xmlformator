@@ -43,3 +43,6 @@ INSERT INTO `shakeersreboot.sre_dataset.partitionedtable` (Date1,msg,url,respons
 SELECT Date,msg,url,responsecode,errormsg,connect,idletime,delaytime
 FROM withoutpartition
 
+partition check
+SELECT * FROM `shakeersreboot.sre_dataset.INFORMATION_SCHEMA.PARTITIONS`
+WHERE table_name = 'testpartition';
