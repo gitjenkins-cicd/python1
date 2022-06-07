@@ -1,0 +1,12 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Hello') {
+            steps {
+            jiraComment body: "Jenkins and Datastudio url for this execution are,  ${BUILD_URL}/console  ,  https://datastudio.google.com/s/s7unPwiGwAE" , issueKey: "${issuekey}"
+			
+            }
+        }
+    }
+}
