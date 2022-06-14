@@ -46,3 +46,5 @@ FROM withoutpartition
 partition check
 SELECT * FROM `shakeersreboot.sre_dataset.INFORMATION_SCHEMA.PARTITIONS`
 WHERE table_name = 'testpartition';
+
+sed -i 's/rc="Non HTTP response code: javax.net.ssl.SSLException"/rc="400"/g'  input.csv
