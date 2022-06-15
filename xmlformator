@@ -48,3 +48,8 @@ SELECT * FROM `shakeersreboot.sre_dataset.INFORMATION_SCHEMA.PARTITIONS`
 WHERE table_name = 'testpartition';
 
 sed -i 's/rc="Non HTTP response code: javax.net.ssl.SSLException"/rc="400"/g'  input.csv
+
+Taurus
+ python3 -m pip install --upgrade pip setuptools wheel
+ python3 -m pip install bzt
+/usr/local/bin/bzt my-config.yml
