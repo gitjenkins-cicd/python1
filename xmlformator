@@ -69,3 +69,8 @@ scenarios:
     - http://blazedemo.com/
     - http://blazedemo.com/vacation.html
 
+Pod commands
+
+kubectl cp mc1:/usr/local/ . -c 2nd
+
+kubectl cp tomcat mc1:/usr/local -c 1st
