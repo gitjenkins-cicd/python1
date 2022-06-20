@@ -74,3 +74,6 @@ Pod commands
 kubectl cp mc1:/usr/local/ . -c 2nd
 
 kubectl cp tomcat mc1:/usr/local -c 1st
+
+perf metrics:
+perfReport filterRegex: '', showTrendGraphs: true, sourceDataFiles: ''
