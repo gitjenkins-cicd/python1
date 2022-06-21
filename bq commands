@@ -3,5 +3,7 @@ select r.name,r.liveLocation,r.enabletagging from `shakeersreboot.sre_dataset.sr
 
 ignoring Additional fields
 bq load --source_format=CSV --ignore_unknown_values
+bq load --source_format=CSV  --ignore_unknown_values shakeersreboot:sre_dataset.srepartition input2.csv Date:INTEGER,msg:STRING,url:STRING,responsecode:INTEGER
+
 
 SELECT (sum(total_bytes_billed)/1099511627776) * 5 as INDollars FROM `region-us.INFORMATION_SCHEMA.JOBS_BY_PROJECT` where job_id like 'job%'
