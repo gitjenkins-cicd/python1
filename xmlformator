@@ -106,3 +106,7 @@ settings:
   aggregator: consolidator
   default-executor: jmeter
   check-interval: 1
+
+
+jmeter manager plugin
+http://search.maven.org/remotecontent?filepath=kg/apc/jmeter-plugins-cmn-jmeter/0.7/jmeter-plugins-cmn-jmeter-0.7.jar
