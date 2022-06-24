@@ -1,0 +1,14 @@
+def run(inpfilename):
+    filecontent = open(inpfilename).read()
+	
+	xmlparser = xmltodict.parse(filecontent)
+	
+	jso = json.dumps(xmlparser)
+	jso = jso.replace('@','').replace('#','')
+	
+	with open('outfile1.ndl','w') as fileto:
+	    fileto.write(jso)
+		
+if __name__ == '__main__'
+     filename = sys.argv[1]
+	 run(filename)
