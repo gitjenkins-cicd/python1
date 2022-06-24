@@ -20,3 +20,6 @@ awk -F ',' '{print $1","$2","$3","$4","$5","$6","$14","$7","$14","$8","$14","$9"
 bq load --source_format=CSV  --skip_leading_rows=1 --ignore_unknown_values shakeersreboot:sre_dataset.jmeter_taurus kpimodified.csv
 
 sed -i "s/$/,,/" kpi.csv
+
+
+https://cloud.google.com/bigquery/quotas
