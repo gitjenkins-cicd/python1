@@ -23,3 +23,6 @@ sed -i "s/$/,,/" kpi.csv
 
 
 https://cloud.google.com/bigquery/quotas
+
+
+mvn spring-boot:run -Dspring-boot.run.jvmArguments='-Dserver.port=8085'
