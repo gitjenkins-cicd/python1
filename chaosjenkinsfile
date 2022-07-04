@@ -1,0 +1,50 @@
+
+pipeline {
+  agent any
+
+  stages {
+    
+    stage('Is chaos enabled') {
+            when {
+                expression { 
+                   return params.assaults == 'ischaosenabled'
+                }
+            }
+            steps {
+                   
+                    echo "Getting chaos info"
+                    sh "curl --silent --output nul  GET ${serverendpoint}/actuator/chaosmonkey/status"
+                    
+                }
+	} 
+	
+	stage('Get info on Assaults enabled') {
+            when {
+                expression { 
+                   return params.assaults == 'getassaults'
+                }
+            }
+            steps {
+                   
+                    echo "Getting Assaults info"
+                    sh "curl --silent --output nul  GET ${serverendpoint}/actuator/chaosmonkey/assaults"
+                    
+                }
+	}  
+      
+	stage('Run Assault activations') {
+	    
+	    when {
+                expression { 
+                   return params.assaults == 'changeassaults'
+                }
+            }
+	    steps {
+                   
+
+          sh "curl --silent --output nul POST  ${serverendpoint}/actuator/chaosmonkey/assaults -H 'Content-Type: application/json' -d  '{\"level\":\"${level}\",\"latency_range_start\": \"${latencystart}\",\"latency_range_end\": \"${latencyend}\",\"latencyActive\": \"${latencyactive}\",\"exceptionsAactive\": \"${exceptionactive}\",\"killApplicationActive\":\"${killapplication}\",\"memoryActive\":\"false\",\"memoryMillisecondsHoldFilledMemory\":\"90000\",\"memoryMillisecondsWaitNextIncrease\": \"1000\",\"memoryFillIncrementFraction\":\"0.15\",\"memoryFillTargetFraction\": \"0.25\",\"runtimeAssaultCronExpression\":\"* * * * * ?\",\"watchedCustomServices\":null,\"preFiltered\":\"false\"}'"
+            
+	    }
+	}
+  }
+}
