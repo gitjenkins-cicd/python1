@@ -1,1 +1,4 @@
 sh "curl --silent --output nul POST  ${serverendpoint}/actuator/chaosmonkey/assaults -H 'Content-Type: application/json' -d  '{\"level\":\"10\",\"latency_range_start\": \"2000\",\"latency_range_end\": \"5000\",\"latencyActive\": \"false\",\"exceptionsAactive\": \"true\",\"killApplicationActive\":\"false\",\"memoryActive\":\"false\",\"memoryMillisecondsHoldFilledMemory\":\"90000\",\"memoryMillisecondsWaitNextIncrease\": \"1000\",\"memoryFillIncrementFraction\":\"0.15\",\"memoryFillTargetFraction\": \"0.25\",\"runtimeAssaultCronExpression\":\"* * * * * ?\",\"watchedCustomServices\":null,\"preFiltered\":\"false\"}'"
+
+
+return ["ischaosenabled", "getassaults", "changeassaults"]
