@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Git clone') {
+            steps {
+                script{
+                    sh "rm -rf flaskwebuinew"
+                    sh "git clone https://github.com/gitjenkins-cicd/flaskwebuinew.git"
+                    sh "pwd;ls"
+                }
+                
+            }
+        }
+        stage('install chaos and run chaos') {
+            steps {
+                script{
+                    sh "gcloud container clusters get-credentials ${projectname} --zone=asia-south1-c"
+                    sh "pip3 install -U chaostoolkit"
+                    sh "pip3 install -U chaostoolkit-kubernetes"
+                    sh "pip3 install -U chaostoolkit-reporting"
+                    sh "/usr/local/bin/chaos run flaskwebuinew/${experimenttype}.json"
+                    //sh "/usr/local/bin/chaos report --export-format=pdf journal.json report.pdf"
+                    sh "chaos report --export-format=html5 journal.json report.html"
+                    
+                }
+                
+            }
+        }
+    }
+}
