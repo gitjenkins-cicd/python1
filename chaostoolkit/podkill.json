@@ -1,31 +1,21 @@
 {
-    "title": "System is resilient to provider's failures",
-    "description": "Can our consumer survive gracefully a provider's failure?",
-    "tags": [
-        "service",
-        "kubernetes",
-        "spring"
-    ],
+    "title": "Do we remain available in face of pod going down?",
+    "description": "We expect Kubernetes to handle the situation gracefully when a pod goes down",
+    "tags": ["kubernetes"],
     "steady-state-hypothesis": {
-        "title": "Services are all available and healthy",
+        "title": "Verifying service remains healthy",
         "probes": [
             {
+                "name": "all-our-microservices-should-be-healthy",
                 "type": "probe",
-                "name": "all-services-are-healthy",
                 "tolerance": true,
                 "provider": {
                     "type": "python",
                     "module": "chaosk8s.probes",
-                    "func": "all_microservices_healthy"
-                }
-            },
-            {
-                "type": "probe",
-                "name": "consumer-service-must-still-respond",
-                "tolerance": 200,
-                "provider": {
-                    "type": "http",
-                    "url": "http://34.93.245.218:9091"
+                    "func": "deployment_available_and_healthy",
+                    "arguments": {
+                        "name": "nginx-deployment"
+                    }
                 }
             }
         ]
@@ -33,19 +23,20 @@
     "method": [
         {
             "type": "action",
-            "name": "stop-provider-service",
+            "name": "terminate-nginx-pod",
             "provider": {
                 "type": "python",
-                "module": "chaosk8s.actions",
-                "func": "kill_microservice",
+                "module": "chaosk8s.pod.actions",
+                "func": "terminate_pods",
                 "arguments": {
-                    "name": "nginx-deployment"
+                    "label_selector": "app=nginx",
+                    "name_pattern": "nginx-deployment-[0-9].*$",
+                    "rand": true
                 }
             },
             "pauses": {
-                "after": 15
+                "after": 2
             }
         }
-    ],
-    "rollbacks": []
+    ]
 }
