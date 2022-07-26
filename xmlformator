@@ -112,3 +112,5 @@ jmeter manager plugin
 http://search.maven.org/remotecontent?filepath=kg/apc/jmeter-plugins-cmn-jmeter/0.7/jmeter-plugins-cmn-jmeter-0.7.jar
 
 docker run -e f="shakeer" -e a=34 -e u="shak"   flagimage:v1
+
+kubectl get pods --no-headers -o custom-columns=":metadata.name"
