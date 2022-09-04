@@ -4,3 +4,7 @@
 /usr/local/bin/swagger2yaml
 /usr/local/lib/python3.9/site-packages/bzt-1.16.8.dist-info/*
 /usr/local/lib/python3.9/site-packages/bzt/*
+
+
+Overwriting command
+\cp -fR bin/ /usr/local/
