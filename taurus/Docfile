@@ -1,0 +1,6 @@
+/usr/local/bin/bzt
+/usr/local/bin/jmx2yaml
+/usr/local/bin/soapui2yaml
+/usr/local/bin/swagger2yaml
+/usr/local/lib/python3.9/site-packages/bzt-1.16.8.dist-info/*
+/usr/local/lib/python3.9/site-packages/bzt/*
