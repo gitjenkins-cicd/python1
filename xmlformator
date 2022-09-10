@@ -114,3 +114,12 @@ http://search.maven.org/remotecontent?filepath=kg/apc/jmeter-plugins-cmn-jmeter/
 docker run -e f="shakeer" -e a=34 -e u="shak"   flagimage:v1
 
 kubectl get pods --no-headers -o custom-columns=":metadata.name"
+
+split files:
+#/bin/bash
+split -dl 500 --additional-suffix=.csv masterbzt.log kpi
+ls -p kpi* | grep -v / > fileinput.csv
+for i in $(cat fileinput.csv)
+do
+echo "Loading file to BQ:," $i
+done
