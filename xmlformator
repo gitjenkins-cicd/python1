@@ -123,3 +123,5 @@ for i in $(cat fileinput.csv)
 do
 echo "Loading file to BQ:," $i
 done
+
+https://github.com/QAInsights/Learn-Locust-Series
