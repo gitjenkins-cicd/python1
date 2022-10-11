@@ -125,3 +125,17 @@ echo "Loading file to BQ:," $i
 done
 
 https://github.com/QAInsights/Learn-Locust-Series
+
+pod script
+#/bin/bash
+
+echo "please enter no of pods: "
+read input
+#for podnum in {1..'$input'}
+for podnum in $(eval echo "{1..$input}")
+do
+cp nginx-pod.yml $podnum-nginx-pod.yml
+sed -i 's/podname/nginx-'$podnum'/' $podnum-nginx-pod.yml
+echo $podnum
+kubectl apply -f $podnum-nginx-pod.yml
+done
