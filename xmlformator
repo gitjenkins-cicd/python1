@@ -139,3 +139,20 @@ sed -i 's/podname/nginx-'$podnum'/' $podnum-nginx-pod.yml
 echo $podnum
 kubectl apply -f $podnum-nginx-pod.yml
 done
+
+infinite loop
+
+for (( ; ;))
+do
+var1=`tail -1 testlog`
+echo $var1
+if [ "$var1" == "endofscript" ]
+then
+echo "match found"
+break;
+else
+echo "Under infinite loop no match found"
+fi
+sleep 2
+done
+
