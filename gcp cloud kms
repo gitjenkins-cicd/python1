@@ -1,0 +1,18 @@
+gcloud kms keyrings create ring1 --location=global
+
+gcloud kms keyrings list --location=global
+
+gcloud kms keyrings add
+
+gcloud kms keyrings add-iam-policy-binding ring1 --location=global --member='serviceAccount:xxxx' --role='roles/cloudkms.cryptoKeyEncrypterDecrypter'
+
+
+gcloud kms keys create key2 --purpose=encryption --keyring=ring2 --protection-level=software --location=us-east1
+
+gcloud kms keyrings create ring2 --location=us-east1
+
+
+
+gcloud kms keyrings add-iam-policy-binding ring2 --location=us-east1 --member='serviceAccount:xxxx.iam.gserviceaccount.com' --role='roles/cloudkms.cryptoKeyEncrypterDecrypter'
+
+gcloud kms keys add-iam-policy-binding key2 --keyring=ring2 --location=us-east1 --member='serviceAccount:xxxx.iam.gserviceaccount.com' --role='roles/cloudkms.cryptoKeyEncrypterDecrypter'
