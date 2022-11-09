@@ -26,3 +26,18 @@ https://cloud.google.com/bigquery/quotas
 
 
 mvn spring-boot:run -Dspring-boot.run.jvmArguments='-Dserver.port=8085'
+
+update command:
+
+update `jgcp-363516.jgcpdataset.TDM`
+  set flag = TRUE
+from (
+  select cid, flag, max(refreshdata) as max_date
+  from `jgcp-363516.jgcpdataset.TDM`
+  group by cid, flag
+) t
+where t.cid = `jgcp-363516.jgcpdataset.TDM`.cid
+and t.flag = `jgcp-363516.jgcpdataset.TDM`.flag
+and t.max_date = `jgcp-363516.jgcpdataset.TDM`.refreshdata;
+
+update `jgcp-363516.jgcpdataset.TDM` set flag = FALSE where flag in (true,false)
