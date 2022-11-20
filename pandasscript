@@ -1,0 +1,12 @@
+import pandas as pd
+df = pd.read_csv(r'test')
+max1 = df['bioupdate'].max()
+min1 = df['bioupdate'].min()
+count1 = df['bioupdate'].count()
+count1err = df['error'].count()
+sum1 = df['bioupdate'].sum()
+n99=df['bioupdate'].quantile(q=0.99)
+n95=df['bioupdate'].quantile(q=0.95)
+n90=df['bioupdate'].quantile(q=0.90)
+perc=(count1err)/(count1)*100
+print(min1,max1,count1,n99,n95,n90,count1err,perc)
