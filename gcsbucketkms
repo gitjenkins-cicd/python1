@@ -1,0 +1,28 @@
+gcloud kms encrypt --location "us-east1" \
+    --keyring "ring2" --key "key2" \
+    --plaintext-file ./testfile.txt \
+    --ciphertext-file ./testfile.enc
+	
+	
+gcloud kms decrypt --location "us-east1" \
+    --keyring "ring2" --key "key2" \
+    --ciphertext-file ./testfile.enc \
+	--plaintext-file ./testfilegcs.txt
+	
+	
+projects/jgcp-363516/locations/us-east1/keyRings/ring2/cryptoKeys/key2
+
+changing label:
+gsutil label ch -l env:qa gs://jgcpencrypted/
+
+clearing default-encryption-key:
+
+gcloud storage buckets update gs://jgcpencrypted/ --clear-default-encryption-key
+
+configuring customer managed keys 
+
+gcloud storage buckets update gs://jgcpencrypted/ --default-encryption-key=projects/jgcp-363516/locations/us-east1/keyRings
+/ring2/cryptoKeys/key2
+
+Describe gcs bucket 
+gcloud storage buckets describe gs://jgcpencrypted
