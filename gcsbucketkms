@@ -26,3 +26,9 @@ gcloud storage buckets update gs://jgcpencrypted/ projects/jgcp-363516/locations
 
 Describe gcs bucket 
 gcloud storage buckets describe gs://jgcpencrypted
+
+
+#############
+gsutil kms encryption -k projects/jgcp-363516/locations/us-east1/keyRings/ring2/cryptoKeys/key2 gs://jgcpencrypted
+
+gsutil kms encryption -d gs://jgcpencrypted
