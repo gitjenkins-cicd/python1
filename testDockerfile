@@ -1,0 +1,6 @@
+FROM alpine
+COPY . .
+RUN mkdir -p /usr/local/lib64/python3.9/site-packages/
+RUN tar -xvf utils.tar.gz
+RUN cp -r utils/psutil* /usr/local/lib64/python3.9/site-packages/
+RUN ls /usr/local/lib64/python3.9/site-packages/
