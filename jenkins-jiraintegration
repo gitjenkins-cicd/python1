@@ -13,3 +13,4 @@ pipeline {
 
 
 jmeter -g [kpi.jtl file] -o [report folder] -Jjmeter.reportgenerator.exporter.html.show_controllers=false -Jjmeter.reportgenerator.exporter=csv
+jmeter -n -t [test plan file] -l [results file] -e -o [report folder] -Jjmeter.reportgenerator.exporter=csv
