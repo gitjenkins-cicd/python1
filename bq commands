@@ -41,3 +41,56 @@ and t.flag = `jgcp-363516.jgcpdataset.TDM`.flag
 and t.max_date = `jgcp-363516.jgcpdataset.TDM`.refreshdata;
 
 update `jgcp-363516.jgcpdataset.TDM` set flag = FALSE where flag in (true,false)
+
+######BQ Query#########
+
+// Import necessary Java classes
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.QueryJobConfiguration;
+import com.google.cloud.bigquery.Job;
+import com.google.cloud.bigquery.JobId;
+import com.google.cloud.bigquery.JobInfo;
+import com.google.cloud.bigquery.TableResult;
+import java.util.UUID;
+
+try {
+    // Create BigQuery client
+    BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+    
+    // Define your SQL query
+    String query = "SELECT * FROM your_dataset.your_table";
+    
+    // Create a query job configuration
+    QueryJobConfiguration queryConfig = QueryJobConfiguration.newBuilder(query).build();
+    
+    // Create a job ID
+    JobId jobId = JobId.of(UUID.randomUUID().toString());
+    
+    // Create the query job
+    Job queryJob = bigquery.create(JobInfo.newBuilder(queryConfig).setJobId(jobId).build());
+    
+    // Wait for the job to complete
+    queryJob = queryJob.waitFor();
+    
+    // Check if the job completed successfully
+    if (queryJob != null && queryJob.getStatus().getError() == null) {
+        // Get the results
+        TableResult result = queryJob.getQueryResults();
+        
+        // Process the result
+        for (com.google.cloud.bigquery.FieldValueList row : result.iterateAll()) {
+            // Get data from the result row
+            String column1 = row.get("column1_name").getStringValue();
+            String column2 = row.get("column2_name").getStringValue();
+            
+            // Do something with the data, like print it
+            log.info("Column 1: " + column1 + ", Column 2: " + column2);
+        }
+    } else {
+        // Handle query job failure
+        log.error("Query job failed: " + queryJob.getStatus().getError());
+    }
+} catch (Exception ex) {
+    log.error("Error: " + ex.getMessage());
+}
