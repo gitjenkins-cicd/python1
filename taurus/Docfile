@@ -8,3 +8,90 @@
 
 Overwriting command
 \cp -fR bin/ /usr/local/
+
+execution:
+  - scenario: complex_scenario
+    concurrency: 20
+    ramp-up: 2m
+    hold-for: 15m
+    iterations: 2000
+    script: complex_test.jmx
+
+reporting:
+  - module: passfail
+    criteria:
+      # Global Criteria
+      - avg-rt > 1200ms for 90% of samples, stop as failed
+      - failures > 3% for 95% of samples, continue as failed
+      - hits < 1000 in 10m, stop as failed
+      - throughput < 10rps for 95% of samples, stop as failed
+
+      # Criteria for Specific Labels (Transactions)
+      - label=Login: avg-rt > 1500ms for 90% of samples, stop as failed
+      - label=Search: p95-rt > 2000ms for 95% of samples, stop as failed
+      - label=Checkout: failures > 1%, continue as failed
+
+      # Composite Condition (Complex Logic)
+      - label=Payment: (avg-rt > 1000ms and throughput < 8rps) for 90% of samples, stop as failed
+
+      # Resource Utilization (if applicable)
+      - cpu > 85% for 95% of time, stop as failed
+      - memory > 75% for 95% of time, continue as failed
+
+  - module: final-stats
+    dump-csv: final_report.csv
+    dump-json: final_report.json
+
+  - module: console
+    summary: true
+
+  - module: junit-xml
+    filename: junit_report.xml
+
+services:
+  - module: shellexec
+    post-process:
+      - command: echo "Test finished with status: ${TEST_STATUS}" >> result_summary.txt
+
+scenarios:
+  complex_scenario:
+    requests:
+      - url: http://example.com/login
+        label: Login
+      - url: http://example.com/search
+        label: Search
+      - url: http://example.com/checkout
+        label: Checkout
+      - url: http://example.com/payment
+        label: Payment
+
+Breakdown of the Advanced Configuration
+1. Global Criteria
+Average Response Time: The average response time across all samples should not exceed 1200ms for 90% of the samples; otherwise, the test will stop.
+Failure Rate: If more than 3% of requests fail for 95% of samples, the test will be marked as failed but continue running.
+Hits: If fewer than 1000 requests are made in 10 minutes, the test will stop.
+Throughput: The test will stop if the throughput falls below 10 requests per second for 95% of samples.
+2. Criteria for Specific Labels (Transactions)
+Login: The average response time for the Login transaction must not exceed 1500ms for 90% of the samples; otherwise, the test will stop.
+Search: The 95th percentile response time for the Search transaction must not exceed 2000ms for 95% of the samples; otherwise, the test will stop.
+Checkout: The failure rate for the Checkout transaction must not exceed 1%; otherwise, the test will continue but be marked as failed.
+3. Composite Condition
+Payment: If the average response time for the Payment transaction exceeds 1000ms and the throughput falls below 8 requests per second for 90% of samples, the test will stop.
+4. Resource Utilization
+CPU Usage: If CPU usage exceeds 85% for 95% of the test duration, the test will stop.
+Memory Usage: If memory usage exceeds 75% for 95% of the test duration, the test will continue but be marked as failed.
+5. Reports and Output
+The results are saved in CSV and JSON formats (final_report.csv and final_report.json).
+A JUnit XML report is also generated (junit_report.xml), which can be used in CI/CD pipelines.
+6. Shell Command Execution
+After the test, a shell command is executed to append the test status to a summary file (result_summary.txt).
+Custom Logic and Flexibility
+This advanced configuration demonstrates how to use complex logic to create robust pass/fail criteria. By combining multiple conditions, labels, and metrics, you can closely monitor your system's performance and stop the test when necessary to prevent resource wastage or further issues.
+
+Summary
+Global Criteria: Apply to all requests, ensuring overall performance metrics are met.
+Label-Specific Criteria: Apply to individual transactions, allowing fine-grained control over each critical operation.
+Composite Conditions: Combine multiple metrics for more sophisticated performance checks.
+Resource Utilization Monitoring: Ensure the test doesn't degrade system performance beyond acceptable limits.
+Custom Reports: Export results in various formats for analysis and integration into CI/CD pipelines.
+Post-Test Actions: Automate tasks like logging or notification based on test outcomes.
